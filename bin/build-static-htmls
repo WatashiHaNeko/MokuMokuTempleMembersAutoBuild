@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+project_dir=$(cd $(dirname $0)/.. && pwd)
+image_name=ruby:private-moku-moku-temple-members
+
+docker build \
+  --tag ${image_name} \
+  . \
+&& \
+docker run \
+  --interactive \
+  --name ruby-private-moku-moku-temple-members \
+  --rm \
+  --tty \
+  --volume ${project_dir}:/root \
+  ${image_name} \
+  rake ghpages
+
